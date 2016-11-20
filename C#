@@ -1,0 +1,84 @@
+#C# console session
+#Credits: Written by Shae Andson
+
+using System;
+using System.Linq;
+
+class Program {
+		public static byte[] hexToByteArray(string Hex) {
+				Hex = Hex.Replace("-", "").Replace(" ", "");
+				byte[] retArray = new byte[Hex.Length / 2];
+				for (int i = 0; i < retArray.Length; i++) {
+						retArray[i] = Convert.ToByte(Hex.Substring(i * 2, 2), 16);
+				}
+				return retArray;
+		}
+
+		public static int binToInt32(string Bin) {
+				Bin = Bin.Replace("-", "").Replace(" ", "");
+				if (Bin.Replace("1", "").Replace("0", "").Length > 0)
+						throw new Exception("Binary string should only contain '1' or '0'");
+				int retInt = 0, len = Bin.Length;
+				for (int p = 0; p < len; p++) 
+						retInt += Bin[p] == '1' ? (int)Math.Pow(2,len-p-1) : 0;
+				return retInt;
+		}
+
+		static void Main(string[] args) {
+				// convert hex 11aa22bb33cc44dd to raw bytes
+				byte[] b = hexToByteArray("11aa22bb33cc44dd");
+
+				// convert raw bytes to hex
+				string s = BitConverter.ToString(b).Replace("-", "");
+
+				// convert an ascii string to raw bytes
+				byte[] b2 = System.Text.Encoding.UTF8.GetBytes("This is a typical string");
+
+				// convert an ascii string to hex
+				string s2 = BitConverter.ToString(b2).Replace("-", "");
+
+				// convert raw bytes to ascii string
+				string s3 = System.Text.Encoding.UTF8.GetString(b2, 0, b2.Length);
+
+				// convert random raw bytes to ascii string - output is nonsense but can be displayed
+				string s4 = System.Text.Encoding.UTF8.GetString(b, 0, b.Length);
+
+				// find the decimal ascii code of a character
+				int i = (int)'A';
+
+				// find the decimal ascii code of a character that is in string format
+				string s5 = "A";
+				char c = s5[0];
+				int i1 = (int)c;
+				// all of that could equally be don in one line as
+				int i2 = (int)"A"[0];
+
+				// find the character from an ascii code
+				char c1 = (char)65;
+
+				// convert an integer in range(0, 256) into a raw byte
+				byte b3 = 200;
+
+				// convert a raw byte to an integer
+				int i3 = b3;
+
+				// convert decimal integer to hexadecimal
+				string s6 = b3.ToString("X");
+
+				// convert hexadecimal to a decimal integer (it's automatic)
+				int i4 = 0xc8;
+
+				// convert decimal integer to binary
+				string s7 = Convert.ToString(200, 2).PadLeft(8, '0');
+
+				// convert binary to decimal integer (sorry no binary literals in C#)
+				int i5 = binToInt32("11001000");
+
+
+				// xor two numbers
+				int i6 = 123 ^ 231;
+
+				// xor two hexadecimal numbers
+				int i7 = 0x7b ^ 0xe7;
+		}
+}
