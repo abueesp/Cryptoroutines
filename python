@@ -1,0 +1,106 @@
+#python 2.7, console session
+#Credits: Written by Abueesp
+
+# Framework
+#pip install pycrypto
+#read -p "Introduce text or file to hex" stringfile
+#hexstr=echo $(xxd -pu <<< $stringfile)
+
+hexstring=$hexstr
+
+# Decoding hex to raw bytes
+>>> string = hexstring.decode('hex') #bytearray has not attribute decode so you have to str() first or use the rest of the options.
+
+>>> import Crypto 
+>>> string1 = str(bytearray.fromhex( hexstring )) #in Python 3.1 you can use bytes.fromhex(hexstring)
+
+>>> import codecs
+>>> string2 = codecs.decode(hexstring, 'hex')
+
+>>> import base64
+>>> string3 = base64.b16decode(hexstring.upper()) #Input uppercase
+
+>>> import binascii
+>>> string4 = binascii.unhexlify(hexstring)
+
+
+
+# Encoding strings and raw bytes to hex 
+#Depending on the case you may have to strip the string to avoid /n /p and so forth.
+#You cannot decode string objects to bytes object with .hex(); strings are already decoded. You'll have to use different methods.
+#You can use the codecs.decode() function to apply hex as a codec. This applies a Binary transform codec; it is the equivalent of using the base64.b16decode() function, with the input string converted to uppercase:
+
+>>> import Crypto 
+>>> hexstring = string.encode('hex')
+
+>>> import codecs
+>>> hexstring1 = codecs.encode(string, 'hex')
+
+>>> import base64
+>>> hexstring2 = base64.b16encode(string) #Output uppercase
+
+>>> import binascii
+>>> hexstring3 = binascii.hexlify(string) 
+
+
+
+# Encoding intergers to hex
+>>> hexint = hex(43)
+>>> hexint1 = hex(-43)
+>>> hexint2 = hex(43L)
+
+# Decoding hex to intergers
+>>> ord(b'\xc8')
+
+
+# Encoding random raw bytes to ascii string:-> this cannot be done!!!  Random raw bytes do not correspond to ascii or utf-8 codes
+>>> b'\x11\xaa"\xbb3\xccD\xdd'.decode()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xaa in position 1: ordinal not in range(128)
+
+
+# Encoding the decimal ascii code from ascii character
+>>> intcode = ord(' ')
+
+# Decoding ascii character from ascii code
+>>> ascii = chr(32)
+
+
+# Decoding ascii decimal code in range(0, 256) into ascii raw bytes  
+>>> rawbyte = bytearray([32]) #notice that this is not bytearray(chr(32)), which also works
+
+# Enconding ascii decimal code in range(0, 256) from ascii raw bytes
+>>> int = ord(bytearray(b' ')) #notice that in this case is not merely bytearray(b' ')
+
+# Decoding decimal integer to hexadecimal
+>>> hex(31209316312096312093872109)
+'0xc8'
+
+# Decoding hexadecimal to a decimal integer (yes, it is automatic)
+>>> 0x9b8f7bfd084a033bL
+
+# Decoding decimal integer to binary
+>>> bin(31209316312096312093872109)
+
+# Encoding binary to decimal integer (yes, it is automatic)
+>>> 0b1100111010000110101000110110101100111111111110000010100011001001000001000111111101101
+
+# XOR two int numbers (do not miss it, exponencial is with **)
+>>> 3120 ^ 3121
+>>> 3120 ^ 3119
+
+# XOR two hexadecimal numbers
+>>> 0xc30 ^ 0xc31
+>>> 0xc30 ^ 0xc2f
+
+#XOR two unequal strings of raw bytes 
+>>> def xorb(a,b):
+...     return bytes(x^y for x,y in zip(a,b))
+... 
+>>> xorb(b'A string of raw bytes',b'Another string of raw bytes')
+>>> xorb('A string of raw bytes','Another string of raw bytes')
+>>> xorb(bytearray('A string of raw bytes'),bytearray('Another string of raw bytes'))
+'<generator object <genexpr> at 0x7f0b75e1f960>'
+
+ 
