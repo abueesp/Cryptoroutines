@@ -1,6 +1,6 @@
 import sys
 
-MSGS = ( ---  11 secret messages  --- )
+MSGS = (message1,message2,message3,message4,message5,message6,message7,message8,message9,message10,message11)
 
 def strxor(a, b):     # xor two strings of different lengths
     if len(a) > len(b):
