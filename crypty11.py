@@ -1,3 +1,6 @@
+#Just for experimental purposes
+#Plase take into account /dev/urandom is not a secure pgr
+
 import sys
 
 MSGS = (message1,message2,message3,message4,message5,message6,message7,message8,message9,message10,message11)
