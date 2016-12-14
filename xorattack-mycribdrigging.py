@@ -1,8 +1,8 @@
 
 import re
 
-MSGS = raw ('Enter ciphertexts vector')
-MSGTODECIPHER = raw('Enter scope ciphertext to decrypt')
+MSGS = raw_input('Enter ciphertexts vector')
+MSGTODECIPHER = raw_input('Enter scope ciphertext to decrypt')
 
 charset = '^['+"a-zA-Z ."+']+$'
 
