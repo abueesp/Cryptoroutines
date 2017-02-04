@@ -77,3 +77,41 @@ b'\xc8'
 ... 
 >>> xorb(b'A string of raw bytes',b'Another string of raw bytes')
 b'\x00N\x1c\x00\x1a\x0c\x1cGS\x1b\x14I\x1c\x06WO\x04Y\x06\x04\x04'
+
+
+
+
+
+
+
+
+#CPA on a two-round Feistel network 
+
+import sys
+import numpy
+from operator import methodcaller
+ 
+
+def main():
+	cyphers = [
+	[["640","640"], ["321","320"]],
+	[["640","640"], ["321","320"]],
+	[["640","640"], ["321","320"]],
+	[["2d1cfa42","c0b1d266"], ["eea6e3dd","b2146dd0"]],
+	]
+	for arow in cyphers:
+		print("\n",arow)
+		for i in range(0,2):
+
+			val1 = arow[0][i] #+ arow[0][1]
+			val2 = arow[1][i] #+ arow[1][1]
+			xor = hexStrToInt(val1) ^ hexStrToInt(val2)
+			print(" %s xor %s => %s" % (val1, val2, intToHexStr(xor)))
+			
+def hexStrToInt(s):
+	return int(s, 16)
+
+def intToHexStr(i):
+	return hex(i)[2:]
+
+main()
