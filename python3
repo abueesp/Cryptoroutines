@@ -1,5 +1,4 @@
 #CPA on a two-round Feistel network 
-
 import sys
 import numpy
 from operator import methodcaller
