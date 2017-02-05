@@ -3,8 +3,6 @@
 import sys
 import numpy
 from operator import methodcaller
- 
-
 def main():
 	cyphers = [
 	[["640","640"], ["321","320"]],
@@ -20,25 +18,19 @@ def main():
 			val2 = arow[1][i] #+ arow[1][1]
 			xor = hexStrToInt(val1) ^ hexStrToInt(val2)
 			print(" %s xor %s => %s" % (val1, val2, intToHexStr(xor)))
-			
 def hexStrToInt(s):
 	return int(s, 16)
-
 def intToHexStr(i):
 	return hex(i)[2:]
-
 main()
-
-
-
-
-#convert hex 11aa22bb33cc44dd to raw bytes (Credits: Written by Sean Murphy)
->>> bytes.fromhex('11aa22bb33cc44dd')
-b'\x11\xaa"\xbb3\xccD\xdd'
 
 #convert raw bytes to hex
 >>> b'\x11\xaa"\xbb3\xccD\xdd'.hex()
 '11aa22bb33cc44dd'
+
+#convert hex 11aa22bb33cc44dd to raw bytes (Credits: Written by Sean Murphy)
+>>> bytes.fromhex('11aa22bb33cc44dd')
+b'\x11\xaa"\xbb3\xccD\xdd'
 
 #convert an ascii string to raw bytes
 >>> 'This is a typical string'.encode()
@@ -98,10 +90,23 @@ b'\xc8'
 >>> 123 ^ 231
 156
 
+
 #xor two hexadecimal numbers
 >>> 0x7b ^ 0xe7
 156
 
+#Python doesn't support (natively) XOR on everything else than int and float
+#so you may
+#xor two unequal strings of raw bytes
+ciphered = ''
+strK = ''
+msg=''
+from itertools import cycle
+CTK = ''.join(chr(ord(c)^ord(k)) for c,k in zip(msg, cycle(strK)))
+print('message: %s ^ key: %s = ciphertext: %s' % (msg, strK, CTK))
+message = ''.join(chr(ord(c)^ord(k)) for c,k in zip(ciphered, cycle(strK)))
+print('ciphertext: %s ^ key: %s = message: %s' % (ciphered, strK, message))
+#or
 #xor two unequal strings of raw bytes
 >>> def xorb(a,b):
 ...     return bytes(x^y for x,y in zip(a,b))
