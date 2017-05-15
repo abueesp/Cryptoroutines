@@ -23,6 +23,16 @@ hexstring=$hexstr
 >>> import binascii
 >>> string4 = binascii.unhexlify(hexstring)
 
+#Encoding hex to string
+>>> create hextostring.py:
+import sys
+for a in sys.argv[1:]:
+    print repr(a)
+    b = a.decode("utf-8") ##to include  utf-8 smileys and so forth 
+    print repr(b) ##to include uft-8 smileys and so forth
+
+>>> python hextostring.py  $'\x47' ##complete list https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
+>>> 'G'
 
 
 # Encoding strings and raw bytes to hex 
@@ -96,11 +106,25 @@ UnicodeDecodeError: 'ascii' codec can't decode byte 0xaa in position 1: ordinal 
 
 #XOR two unequal strings of raw bytes 
 >>> def xorb(a,b):
-...     return bytes(x^y for x,y in zip(a,b))
-... 
->>> xorb(b'A string of raw bytes',b'Another string of raw bytes')
->>> xorb('A string of raw bytes','Another string of raw bytes')
->>> xorb(bytearray('A string of raw bytes'),bytearray('Another string of raw bytes'))
+     return bytes(x^y for x,y in zip(a,b))
+>>> print xorb(b'A string of raw bytes',b'Another string of raw bytes')
+>>> print xorb('A string of raw bytes','Another string of raw bytes')
+>>> print xorb(bytearray('A string of raw bytes'),bytearray('Another string of raw bytes'))
 '<generator object <genexpr> at 0x7f0b75e1f960>'
 
- 
+#XOR two strings
+>>> def xor_two_str(a,b):
+...   return ''.join([hex(ord(a[i%len(a)]) ^ ord(b[i%(len(b))]))[2:] for i in range(max(len(a), len(b)))])
+
+print xor_two_str("12ef","abcd")
+...    return ''.join([hex(ord(a[i%len(a)]) ^ ord(b[i%(len(b))]))[2:] for i in range(max(len(a), len(b)))])
+
+print xor_two_str("12ef","abcd")
+...     return bytes(x^y for x,y in zip(a,b))
+... 
+>>> print xorb(b'A string of raw bytes',b'Another string of raw bytes')
+>>> print xorb('A string of raw bytes','Another string of raw bytes')
+>>> print xorb(bytearray('A string of raw bytes'),bytearray('Another string of raw bytes'))
+'<generator object <genexpr> at 0x7f0b75e1f960>'
+
+
