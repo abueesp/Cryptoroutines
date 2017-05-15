@@ -1,12 +1,10 @@
-#python 2.7, console session (for hex to str, bash echo -n -e '\x66\x6f\x6f')
+#python 2.7, console session 
+(for hex to ascii, bash ## echo -n -e '\x66\x6f\x6f')
+(for ascii to hex)
 #Written by Abueesp
 
 # Framework
 #pip install pycrypto
-#read -p "Introduce text or file to hex" stringfile
-#hexstr=echo $(xxd -pu <<< $stringfile)
-
-hexstring=$hexstr
 
 # Decoding hex to raw bytes
 >>> string = hexstring.decode('hex') #bytearray has not attribute decode so you have to str() first or use the rest of the options.
