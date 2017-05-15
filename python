@@ -1,5 +1,5 @@
-#python 2.7, console session
-#Credits: Written by Abueesp
+#python 2.7, console session (for hex to str, bash echo -n -e '\x66\x6f\x6f')
+#Written by Abueesp
 
 # Framework
 #pip install pycrypto
@@ -113,18 +113,9 @@ UnicodeDecodeError: 'ascii' codec can't decode byte 0xaa in position 1: ordinal 
 '<generator object <genexpr> at 0x7f0b75e1f960>'
 
 #XOR two strings
->>> def xor_two_str(a,b):
+>>> def xorstr(a,b):
 ...   return ''.join([hex(ord(a[i%len(a)]) ^ ord(b[i%(len(b))]))[2:] for i in range(max(len(a), len(b)))])
-
-print xor_two_str("12ef","abcd")
-...    return ''.join([hex(ord(a[i%len(a)]) ^ ord(b[i%(len(b))]))[2:] for i in range(max(len(a), len(b)))])
-
-print xor_two_str("12ef","abcd")
-...     return bytes(x^y for x,y in zip(a,b))
-... 
->>> print xorb(b'A string of raw bytes',b'Another string of raw bytes')
->>> print xorb('A string of raw bytes','Another string of raw bytes')
->>> print xorb(bytearray('A string of raw bytes'),bytearray('Another string of raw bytes'))
-'<generator object <genexpr> at 0x7f0b75e1f960>'
+>>> print xorstr("stringA1234","stringB5678")
+>>> 0000003444c
 
 
