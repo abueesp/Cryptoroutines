@@ -5,6 +5,7 @@ echo $ASC >> ASCII
 xxd -b ASCII
 rm ASCII
 }
+
 alias asciioct='read -p "Introduce ascii string: " ASC; echo $ASC >> ASCII; echo "ibase=16;obase=8; $(xxd -ps -u ASCII)" | bc; rm ASCII'
 alias asciihex='read -p "Introduce ascii string: " ASC; echo $ASC >> ASCII; xxd -ps -u ASCII; rm ASCII'
 alias asciic='read -p "Introduce ascii string: " ASC; echo $ASC >> ASCII; xxd -i $ASCII; rm ASCII'
@@ -30,3 +31,4 @@ alias hexascii='read -p "Introduce hex number: " HEX; echo $HEX >> HEXY; xxd -r 
 alias hexdec='read -p "Introduce hex number: " HEX; echo "ibase=16; $HEX" | bc'
 alias hexbin='read -p "Introduce hex number: " HEX; echo "ibase=16;obase=2; $HEX" | bc; echo $((0x$HEX))'
 alias hexoct='read -p "Introduce hex number: " HEX; echo "ibase=16;obase=8; $HEX" | bc'
+
